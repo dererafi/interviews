@@ -1,0 +1,44 @@
+﻿[
+    { 
+	"BarCode": "item1Id",
+	"ItemName": "item1Description",
+	"PriceRecords": [{
+						"CurrencyCode": "ZAR",
+						"SellingPrice": "10"
+					},
+					{
+						"CurrencyCode": "USD",
+						"SellingPrice": "11"
+					},
+					{
+						"CurrencyCode": "GBP",
+						"SellingPrice": "12"
+					},
+					{
+						"CurrencyCode": "EUR",
+						"SellingPrice": "13"
+					}
+				]
+	},
+    { 
+	"BarCode": "item2Id",
+	"ItemName": "item2Description",
+	"PriceRecords": [{
+						"CurrencyCode": "ZAR",
+						"SellingPrice": "12"
+					},
+					{
+						"CurrencyCode": "USD",
+						"SellingPrice": "13"
+					},
+					{
+						"CurrencyCode": "GBP",
+						"SellingPrice": "14"
+					},
+					{
+						"CurrencyCode": "EUR",
+						"SellingPrice": "15"
+					}
+				]
+	}    
+]

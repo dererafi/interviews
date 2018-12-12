@@ -5,100 +5,33 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
 using Newtonsoft.Json;
+using Realmdigital_Interview.JsonApi;
+using Realmdigital_Interview.Models;
+using Realmdigital_Interview.Repositories;
+using Realmdigital_Interview.Services;
 
 namespace Realmdigital_Interview.Controllers
 {
-    public class ProductController
+    public class ProductController : Controller
     {
+        private readonly IProductService _productService;
 
-        [Route("product")]
-        public object GetProductById(string productId)
+        public ProductController(IProductService productService)
         {
-            string response = "";
-
-            using (var client = new WebClient())
-            {
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                response = client.UploadString("http://192.168.0.241/eanlist?type=Web", "POST", "{ \"id\": \"" + productId + "\" }");
-            }
-            var reponseObject = JsonConvert.DeserializeObject<List<ApiResponseProduct>>(response);
-
-            var result = new List<object>();
-            for (int i = 0; i < reponseObject.Count; i++)
-            {
-                var prices = new List<object>();
-                for (int j = 0; j < reponseObject[i].PriceRecords.Count; j++)
-                {
-                    if (reponseObject[i].PriceRecords[j].CurrencyCode == "ZAR")
-                    {
-                        prices.Add(new
-                        {
-                            Price = reponseObject[i].PriceRecords[j].SellingPrice,
-                            Currency = reponseObject[i].PriceRecords[j].CurrencyCode
-                        });
-                    }
-                }
-                result.Add(new
-                {
-                    Id = reponseObject[i].BarCode,
-                    Name = reponseObject[i].ItemName,
-                    Prices = prices
-                });
-            }
-            return result.Count > 0 ? result[0] : null;
+            _productService = productService; 
         }
 
-        [Route("product/search")]
-        public List<object> GetProductsByName(string productName)
+        public Product GetProductById(string productId = "item1Id")
         {
-            string response = "";
-
-            using (var client = new WebClient())
-            {
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                response = client.UploadString("http://192.168.0.241/eanlist?type=Web", "POST", "{ \"names\": \"" + productName + "\" }");
-            }
-            var reponseObject = JsonConvert.DeserializeObject<List<ApiResponseProduct>>(response);
-
-            var result = new List<object>();
-            for (int i = 0; i < reponseObject.Count; i++)
-            {
-                var prices = new List<object>();
-                for (int j = 0; j < reponseObject[i].PriceRecords.Count; j++)
-                {
-                    if (reponseObject[i].PriceRecords[j].CurrencyCode == "ZAR")
-                    {
-                        prices.Add(new
-                        {
-                            Price = reponseObject[i].PriceRecords[j].SellingPrice,
-                            Currency = reponseObject[i].PriceRecords[j].CurrencyCode
-                        });
-                    }
-                }
-                result.Add(new
-                {
-                    Id = reponseObject[i].BarCode,
-                    Name = reponseObject[i].ItemName,
-                    Prices = prices
-                });
-            }
-            return result;
+            var product = _productService.GetProductById(productId);
+            return product;
         }
-    }
 
-
-
-    class ApiResponseProduct
-    {
-        public string BarCode { get; set; }
-        public string ItemName { get; set; }
-        public List<ApiResponsePrice> PriceRecords { get; set; }
-    }
-
-    class ApiResponsePrice
-    {
-        public string SellingPrice { get; set; }
-        public string CurrencyCode { get; set; }
+        public List<Product> GetProductsByName(string productName)
+        {
+            return _productService.GetProductsByName(productName);
+        }
     }
 }
