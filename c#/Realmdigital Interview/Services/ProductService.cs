@@ -12,6 +12,7 @@ namespace Realmdigital_Interview.Services
     {
         Product GetProductById(string productId);
         List<Product> GetProductsByName(string productName);
+        List<Product> GetProducts();
     }
 
     public class ProductService : IProductService
@@ -26,6 +27,11 @@ namespace Realmdigital_Interview.Services
         public Product GetProductById(string productId)
         {
             return _productRepository.GetProductById(productId, StringConstants.BaseCurrency);
+        }
+
+        public List<Product> GetProducts()
+        {
+            return _productRepository.GetProducts();
         }
 
         public List<Product> GetProductsByName(string productName)

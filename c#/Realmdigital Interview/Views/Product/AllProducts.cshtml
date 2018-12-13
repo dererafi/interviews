@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Realmdigital_Interview.Models.Product>
+@using MVCGrid.Web
+@using Realmdigital_Interview.Models
+
+<script src="~/Scripts/jquery.blockUI.js"></script>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <span>&nbsp;</span>
+
+        <div class="form-group">
+                <label>Search:</label>
+                <input id="searchInput" type="search" placeholder="Search" class="form-control"
+                        data-mvcgrid-type="additionalQueryOption" data-mvcgrid-option="search" data-mvcgrid-name="PrintTemplatesGrid"
+                        data-mvcgrid-apply-additional="keyup">
+            </div>
+        @Html.MVCGrid("ProductGrid")
+    </div>
+</div>
+
+<style type="text/css">
+    .ui-widget-overlay {
+        background-color: rgb(0, 0, 0) !important;
+        opacity: 0.6 !important;
+        cursor: wait !important;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="~/MVCGridHandler.axd/script.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />

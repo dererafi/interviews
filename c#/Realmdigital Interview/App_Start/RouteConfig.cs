@@ -16,7 +16,7 @@ namespace Realmdigital_Interview
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Product", action = "GetProductById", id = UrlParameter.Optional }
+                defaults: new { controller = "Product", action = "AllProducts", id = UrlParameter.Optional }
             );
         }
     }

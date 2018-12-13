@@ -33,5 +33,10 @@ namespace Realmdigital_Interview.Controllers
         {
             return _productService.GetProductsByName(productName);
         }
+
+        public ActionResult AllProducts(string productName = "item1Id")
+        {
+            return View();
+        }
     }
 }
