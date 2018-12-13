@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Realmdigital_Interview.Models.Product>
+﻿@model IEnumerable<Realmdigital_Interview.Models.ProductPrices>
 @using MVCGrid.Web
 @using Realmdigital_Interview.Models
 
@@ -9,12 +9,12 @@
         <span>&nbsp;</span>
 
         <div class="form-group">
-                <label>Search:</label>
-                <input id="searchInput" type="search" placeholder="Search" class="form-control"
-                        data-mvcgrid-type="additionalQueryOption" data-mvcgrid-option="search" data-mvcgrid-name="PrintTemplatesGrid"
-                        data-mvcgrid-apply-additional="keyup">
-            </div>
-        @Html.MVCGrid("ProductGrid")
+            <label>Search:</label>
+            <input id="searchInput" type="search" placeholder="Search" class="form-control"
+                   data-mvcgrid-type="additionalQueryOption" data-mvcgrid-option="search" data-mvcgrid-name="PrintTemplatesGrid"
+                   data-mvcgrid-apply-additional="keyup">
+        </div>
+        @Html.MVCGrid("ProductPricesGrid", new { barCode = ViewBag.BarCode })
     </div>
 </div>
 
@@ -27,10 +27,6 @@
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="~/Scripts/appjs/productMgt.js"></script>
 <script src="~/MVCGridHandler.axd/script.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 
-<script type="text/javascript">
-    setBaseUrl(@Html.Raw(HttpUtility.JavaScriptStringEncode(Url.Content("~/"), true)));
-</script>
